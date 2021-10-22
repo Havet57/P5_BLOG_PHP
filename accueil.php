@@ -15,11 +15,11 @@
         <h2>Développeuse en perpétuelle devenir</h2>
 
         <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Email address</label>
+        <label for="exampleFormControlInput1" class="form-label">Adresse mail</label>
         <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
         </div>
         <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+        <label for="exampleFormControlTextarea1" class="form-label">Ecrivez votre commentaire</label>
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
 
