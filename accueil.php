@@ -11,17 +11,88 @@
 </head>
 <body>
 
-        <h1>RABEHI Sofia</h1>
+<div class="container-fluid">
+        <div class="row">
+                <div class="col-3">
+                        <h1>RABEHI Sofia</h1>
+                </div>
+                <div class="col-3">
+                        <div class="dropdown">
+                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Dropdown link
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
+                        </div>
+                
+                </div>
+
+                <div class="col-3">
+                        <img src="img/avatar.png" alt="">
+
+                </div>
+</div>
+
+        
         <h2>Développeuse en perpétuelle devenir</h2>
 
-        <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Adresse mail</label>
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+        <div class="row">
+                <div class="col">
+                        <div class="card">
+                                <h5 class="card-header">Featured</h5>
+                                        <div class="card-body">
+                                                <h5 class="card-title">Special title treatment</h5>
+                                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                        </div>
+                        </div>
+                </div>
+                <div class="col">
+                        <div class="card">
+                                <h5 class="card-header">Featured</h5>
+                                        <div class="card-body">
+                                                <h5 class="card-title">Special title treatment</h5>
+                                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                        </div>
+                        </div>
+                </div>
+                <div class="col">
+                        <div class="card">
+                                <h5 class="card-header">Featured</h5>
+                                        <div class="card-body">
+                                                <h5 class="card-title">Special title treatment</h5>
+                                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                        </div>
+                        </div>
+                </div>
         </div>
-        <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Ecrivez votre commentaire</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+
+        <div class="row">
+                <div class="col-6">
+                <form>
+                        <div class="form-group">
+                                <label for="exampleFormControlInput1">Adresse Mail</label>
+                                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                        </div>
+                        <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Parle moi de toi</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>
+                </form>
+                </div>
         </div>
+        
+                <footer class="bg-light text-center text-lg-start">
+                        <div class="text-center p-3">
+                                <p>2021 Copyright : Sofia R</p>
+                        </div>
+                </footer>
 
 
 
