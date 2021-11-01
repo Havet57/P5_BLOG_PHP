@@ -7,7 +7,9 @@
             "email": "64773554+Havet-68@users.noreply.github.com"
         }
     ],
-    "require": {}, 
+    "require": {
+        "twig/twig": "^3.3"
+    }, 
     "autoload": {
         "psr-4": {
             "App\\": "src",
