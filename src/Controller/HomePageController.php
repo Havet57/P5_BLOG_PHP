@@ -3,10 +3,10 @@
 namespace App\Controller;
 use App\Repository\ArticleRepository;
 
-class HomePageController {
-    public function home (){
+class HomePageController extends CoreController {
+    public function home (){      
         $repository = new ArticleRepository;
         $articles=$repository->findMostRecent();
-        require_once ('templates/homepage.php');
+        echo $this->twig->render('homepage.html.twig', ['articles' => $articles]);
     }
 }
