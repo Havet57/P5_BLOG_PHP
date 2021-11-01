@@ -54,18 +54,19 @@
     </div>
     
     <div class="row mb-5">
-        <?php foreach ($articles as $article){ ?>   
+        {% for  article in articles  %} 
             <div class="col">
                 <div class="card">
                     <h5 class="card-header">Featured</h5>
                     <div class="card-body">
-                        <h5 class="card-title"><?= $article['title']; ?> </h5>
-                        <p class="card-text"><?= $article['content']; ?> </p>
+                        <h5 class="card-title">{{article.title}}</h5>
+                        <p class="card-text">{{article.content}}</p>
                         <a href="#" class="btn btn-primary">Lire la suite</a>
                     </div>
                 </div>
             </div>
-        <?php } ?> 
+        {% endfor %}
+        
 
     </div>
 

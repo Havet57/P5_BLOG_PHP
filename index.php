@@ -1,15 +1,9 @@
 <?php
 
-require_once('vendor/autoload.php');
+require_once 'vendor/autoload.php';
 
-use App\Controller\LoginController;
+use App\Controller\HomePageController;
 
-// $controller=new LoginController;
+$controller = new HomePageController;
 
-// $controller->index();
-
-$Article = new Article; 
-
-$Article > index();
-
-?>
+$controller->home();

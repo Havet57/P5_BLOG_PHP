@@ -1,11 +1,12 @@
 <?php 
 
 namespace App\Controller;
-
+use App\Repository\ArticleRepository;
 
 class HomePageController {
     public function home (){
-        $articles = [];
-        require_once ('templates/homepage.html');
+        $repository = new ArticleRepository;
+        $articles=$repository->findMostRecent();
+        require_once ('templates/homepage.php');
     }
 }
