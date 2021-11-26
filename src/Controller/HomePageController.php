@@ -1,11 +1,12 @@
 <?php 
 
 namespace App\Controller;
+use App\Repository\ArticleRepository;
 
-
-class HomePageController {
-    public function home (){
-        $articles = [];
-        require_once ('templates/homepage.html');
+class HomePageController extends CoreController {
+    public function home (){      
+        $repository = new ArticleRepository;
+        $articles=$repository->findMostRecent();
+        echo $this->twig->render('homepage.html.twig', ['articles' => $articles]);
     }
 }
