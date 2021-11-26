@@ -29,6 +29,13 @@ class UserRepository extends CoreRepository {
         $sth->execute();
 
         $users = $sth->fetchAll(\PDO::FETCH_ASSOC);
+
+        /* ce qui est plus bas est une ternaire
+         if(count($users)==1){
+            return current($users)
+        } else {
+            return array()
+        }*/
         return (count($users)==1)?current($users):[];
     }
 
