@@ -21,9 +21,8 @@ class UserManager {
         $userRepository = new UserRepository();
         $userByEmail=$userRepository->findOneByEmail($email);
         $userByUsername=$userRepository->findOneByUsername($username);
-        
         if(empty($userByEmail) && empty($userByUsername)){
-            $user=$userRepository->save($username, $password, $email);
+            $userRepository->save($username, $password, $email);
             return true;
         }
 
