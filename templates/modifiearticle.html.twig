@@ -1,0 +1,12 @@
+
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<form method="POST">
+    <input type="text" name="textTitle" value="{{article.title}}">
+    <textarea name='textContent' placeholder="Taper votre contenu">{{article.content}}</textarea>
+    <input type="submit" value="modifier">
+</form>
+
+{% endblock %}

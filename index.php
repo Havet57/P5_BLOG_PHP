@@ -1,6 +1,6 @@
 <?php
 
-// session_start();
+session_start();
 
 require_once 'vendor/autoload.php';
 
@@ -40,6 +40,14 @@ if($controller=='article') {
         $controller->createArticle();
     }
 
+    if( $methode=='update'){
+        $controller->updateArticle($_GET['id']);
+    }
+
+    if( $methode=='delete'){
+        $controller->deleteArticle($_GET['id']);
+    }
+
 
 }
 
@@ -54,7 +62,13 @@ if ($controller=='authentification'){
     if( $methode=='register' ){
         $controller->register();
     }
+
+    if( $methode=='logout'){
+        $controller->logout();
+    }
 }
+
+
 
 
 

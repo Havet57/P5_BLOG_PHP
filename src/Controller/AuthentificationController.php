@@ -13,6 +13,7 @@ class AuthentificationController extends CoreController {
             //si le name est ok on vérifie l'password
             if($userManager->isAuthenticate($_POST['username'], $_POST['password'])){
                 //redirection vers la page des articles
+                $_SESSION['username']=$_POST['username'];
                 header('Location: index.php');
             } else {
                 $message = 'ko';
@@ -35,6 +36,12 @@ class AuthentificationController extends CoreController {
             }
         }
         echo $this->twig->render('register.html.twig');
+    }
+
+    public function logout(){
+        session_destroy();
+
+        header('location: index.php');
     }
     
     

@@ -42,20 +42,20 @@ class UserRepository extends CoreRepository {
     public function save($username, $email, $password){
 
 
-        $sql = "INSERT into `users` (username, email, /* type, */ `password`)
-        VALUES ('$username', '$email', 'user', '".hash('sha256', $password)."')";
+        $sql = "INSERT into `users` (username, email, `password`)
+        VALUES (:username, :email, :pass)";
 
         $sth = $this->pdo->prepare($sql);
 
         $sth->bindParam(':username', $username);
         $sth->bindParam(':email', $email);
-        $sth->bindParam(':password', $password);
+        $sth->bindParam(':pass', hash('sha256', $password));
 
         $sth->execute();
 
-        return $sth->fetchAll(\PDO::FETCH_ASSOC);
+        var_dump('test');
 
-
+        die;
 
 
     }

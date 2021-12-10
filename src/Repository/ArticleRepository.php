@@ -52,4 +52,28 @@ class ArticleRepository extends CoreRepository {
         $sth->execute();
     }
 
+    
+    public function update(string $title, string $content, int $id):void {
+        $sql = 'UPDATE articles SET title=:title, content=:content WHERE id=:id';
+
+        $sth = $this->pdo->prepare($sql);
+
+        $sth->bindParam(':title', $title);
+        $sth->bindParam(':content', $content);
+        $sth->bindParam(':id', $id);
+
+        $sth->execute();
+    }
+
+    public function delete(int $id):void {
+        $sql = 'DELETE FROM articles WHERE id=:id';
+
+        $sth = $this->pdo->prepare($sql);
+
+        $sth->bindParam(':id', $id);
+
+        $sth->execute();
+    }
+
+
 }

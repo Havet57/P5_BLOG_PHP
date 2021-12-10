@@ -12,9 +12,13 @@ class ArticleController extends CoreController {
     }
 
     public function allArticles(){
-        $articleRepository = new ArticleRepository;
-        $articles = $articleRepository->findAll();
-        echo $this->twig->render('touslesarticles.html.twig', ['articles' => $articles]);
+        if(!empty($this->user)){
+            $articleRepository = new ArticleRepository;
+            $articles = $articleRepository->findAll();
+            echo $this->twig->render('touslesarticles.html.twig', ['articles' => $articles, 'user'=> $this->user]);
+        }else{
+            header('location: index.php?controller=authentification&methode=login');
+        }
     }
 
     public function createArticle(){
@@ -23,5 +27,30 @@ class ArticleController extends CoreController {
             $ArticleRepository->save($_POST['textTitle'], $_POST['textContent']);  
         }
         echo $this->twig->render('ecrireunarticle.html.twig');
+    }
+
+    public function updateArticle(int $id){
+        if($this->user['is_admin']){
+            $articleRepository = new ArticleRepository;
+
+            if(!empty($_POST['textTitle'])){
+                $articleRepository->update($_POST['textTitle'], $_POST['textContent'], $id);
+                header('Location: index.php');
+            }
+            $article = $articleRepository->find($id);
+
+            echo $this->twig->render('modifiearticle.html.twig', ['article' => $article ]);
+        }else{
+            echo 'bien tenté';
+        }
+    }
+
+    public function deleteArticle(int $id){
+        $articleRepository = new ArticleRepository;
+        $articleRepository->delete($id);
+
+        header('location: index.php?controller=article&methode=tous');
+
+        
     }
 }
