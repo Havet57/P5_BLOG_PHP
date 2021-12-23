@@ -1,41 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
-<link rel="stylesheet" href="style.css">
-<title>{{article.title}}</title>
-</head>
-<body>
-    <h1>{{article.title}}</h1>
-    <time>{{article.date}}</time>
-    <br><br>
-    <p>{{article.content}}</p>
-    <hr>
+{% extends "base.html.twig" %}
 
-    <div class="row">
-        <div class="col-6">
-        <form action="article.php?id={{article.id}}" methode="post">
-  <div class="form-group">
-    <label for="exampleFormControlInput1">Nom</label>
-    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Jean baptiste">
-    <label for="exampleFormControlInput1">Adresse email</label>
-    <input type="email" class="form-control" id="exampleFormControlInput2" placeholder="mail@exemple.com">
-  </div>
-  <div class="form-group">
-    <label for="exampleFormControlTextarea1">Ecris ton commentaire ici</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-  </div>
-</form>
+{% block body %}
+
+    <title>{{article.title}}</title>
+    </head>
+    <body>
+        <h1>{{article.title}}</h1>
+        <time>{{article.date}}</time>
+        <br><br>
+        <p>{{article.content}}</p>
+        <hr>
+
+        <div class="row">
+            <div class="col-6">
+              <form action="" method="post">
+                <div class="form-group">
+                  <label for="exampleFormControlTextarea1">Ecris ton commentaire ici</label>
+                  <textarea class="form-control" name="comments" id="exampleFormControlTextarea1" rows="3"></textarea>
+                  <button type="submit" class="btn btn-primary">Envoyer</button>
+                </div>
+              </form>
+            </div>
         </div>
-    </div>
-    
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    </body>
-    </html>
+        {% for comment in comments %} 
+            <div class="col-md-6">
+                  <div class="mb-1 text-muted">{{comment.username}}</div>
+                  <p class="card-text mb-auto">{{comment.comment}}</p>
+                  <p class="card-text mb-auto">{{comment.date}}</p>
+            </div>
+        {% endfor %}
+  
+{% endblock %}
+    

@@ -28,11 +28,13 @@
                 <a class="nav-link" href="http://localhost/P5_BLOG_PHP/index.php?controller=article&methode=tous">Tous les Articles</a>
             </li>
             {% if user is not empty %}
-                {% block ecrire_article %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="http://localhost/P5_BLOG_PHP/index.php?controller=article&methode=creation">Ecrire un article</a>
-                    </li>
-                {% endblock %}
+                {% if user.is_admin %}
+                    {% block ecrire_article %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="http://localhost/P5_BLOG_PHP/index.php?controller=article&methode=creation">Ecrire un article</a>
+                        </li>
+                    {% endblock %}
+                {% endif %}
 
                 <li class="nav-item">
                     <a class="nav-link" href="http://localhost/P5_BLOG_PHP/index.php?controller=authentification&methode=logout">se deconnecter</a>
