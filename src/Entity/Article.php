@@ -2,24 +2,41 @@
 
 namespace App\Entity;
 
-use DateTime;
-
 // require_once 'admin.class.php';
-final class Article {
+class Article {
     private int $id;
-    private string $user;
-    private \DateTime $date;
+    private string $title;
+    private string $content;
+    private string $date;
+    /*private User $user; 
     private int $viewCounts;
-    private int $commentsCount;
-    private string $status;
+    private int $commentsCount;*/
 
-    public function __construct(int $id, string $user, \DateTime $date, int $viewCounts, int $commentsCount, string $status ){
-        $this->id=$id;
-        $this->user=$user;
-        $this->date=$date;
-        $this->viewCounts=$viewCounts;
-        $this->commentsCount=$commentsCount;
-        $this->status=$status;
+    // public function __construct(int $id, string $title, string $content, string $date){
+    //     $this->id=$id;
+    //     $this->title=$title;
+    //     $this->content=$content;
+    //     $this->date=$date;
+    //     // $this->user=$user;
+    //     // $this->viewCounts=$viewCounts;
+    //     // $this->commentsCount=$commentsCount;
+
+    // }
+
+    public function getId():int{
+        return $this->id;
+    }
+
+    public function getTitle():string{
+        return $this->title;
+    }
+
+    public function getContent():string{
+        return $this->content;
+    }
+
+    public function getDate():\datetime{
+        return $this->date;
     }
 
 

@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+
+    {% for toApprove in toApproves %}
+        <div class="col-md-6">
+                  <div class="mb-1 text-muted">{{toApprove.username}}</div>
+                  <p class="card-text mb-auto">{{toApprove.comment}}</p>
+                  <p class="card-text mb-auto">{{toApprove.date}}</p>
+                  <a href="index.php?controller=comments&methode=approve&id={{toApprove.id}}">valider</a>
+                  <a href="index.php?controller=comments&methode=delete&id={{toApprove.id}}">supprimer</a>
+            </div>
+    {% endfor %}
+
+
+{% endblock %}
+
+
+

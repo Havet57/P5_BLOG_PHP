@@ -2,20 +2,22 @@
 
 namespace App\Repository;
 
+use App\Entity\Article;
+
 class ArticleRepository extends CoreRepository {
-    public function findMostRecent(int $limit=3):array{
-
-
+    
+    public function findMostRecent(int $limit=3):?Article{
         $sql = 'SELECT * FROM articles ORDER BY `date` DESC LIMIT 3';
-
         $sth = $this->pdo->prepare($sql);
-
-
         $sth->execute();
-        return $sth->fetchAll(\PDO::FETCH_ASSOC);
+        $article = $sth->fetchAll(\PDO::FETCH_ASSOC);
+        if($article!==false){
+            return new Article($article['id'], $article['title'], $article['content'], $article['date']);
+        } 
+        return null;
     }
 
-    public function findAll():array{
+    public function findAll():?Article {
 
 
         $sql = 'SELECT * FROM articles ORDER BY `date` DESC';
@@ -24,13 +26,17 @@ class ArticleRepository extends CoreRepository {
 
 
         $sth->execute();
-        return $sth->fetchAll(\PDO::FETCH_ASSOC);
+        $article = $sth->fetchAll(\PDO::FETCH_ASSOC);
+        if($article!==false){
+            return new Article($article['id'], $article['title'], $article['content'], $article['date']);
+        } 
+        return null;
     }
 
 
 
 
-    public function find(int $id):array {
+    public function find(int $id):?Article {
         $sql = 'SELECT * FROM articles WHERE id=:id';
 
         $sth = $this->pdo->prepare($sql);
@@ -38,7 +44,14 @@ class ArticleRepository extends CoreRepository {
         $sth->bindParam(':id', $id);
 
         $sth->execute();
-        return $sth->fetch(\PDO::FETCH_ASSOC);
+        $sth->setFetchMode(\PDO::FETCH_CLASS, Article::class);
+        $article = $sth->fetch();
+        var_dump($article);
+        die;
+        if($article!==false){
+            return new Article($article['id'], $article['title'], $article['content'], $article['date']);
+        } 
+        return null;
     }
 
     public function save(string $title, string $content):void {

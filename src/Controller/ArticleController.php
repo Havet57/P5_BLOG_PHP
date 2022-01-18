@@ -7,12 +7,12 @@ use App\Repository\CommentsRepository;
 class ArticleController extends CoreController {
     public function displayArticle(int $id){  
         $commentsRepository = new CommentsRepository;
-        if(!empty($_POST['comments'])){
-            $commentsRepository->save($id, $this->user['id'], $_POST['comments']);
-        }
-        $comments = $commentsRepository->findAll($id);
         $repository = new ArticleRepository;
         $article=$repository->find($id);
+        if(!empty($_POST['comments'])){
+            $commentsRepository->save($article, $this->user, $_POST['comments']);
+        }
+        $comments = $commentsRepository->findAll($id);
         echo $this->twig->render('article.html.twig', ['article' => $article, 'comments' => $comments]);
     }
 

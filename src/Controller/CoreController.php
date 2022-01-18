@@ -13,8 +13,6 @@ class CoreController {
         $this->twig = new \Twig\Environment($loader);
         if(!empty($_SESSION['username'])){
             $this->user = (new UserRepository)->findOneByUsername($_SESSION['username']);
-            $this->user['is_admin']=$this->user['type']==='admin';
-
             // var_dump($this->user);
         }
 
