@@ -3,34 +3,50 @@
 namespace App\Repository;
 
 use App\Entity\Article;
+use App\Entity\User;
 
 class ArticleRepository extends CoreRepository {
     
-    public function findMostRecent(int $limit=3):?Article{
+    /**
+     * @param int $limit=3
+     * 
+     * @return Article[]
+     */
+    public function findMostRecent(int $limit=3):array{
         $sql = 'SELECT * FROM articles ORDER BY `date` DESC LIMIT 3';
         $sth = $this->pdo->prepare($sql);
         $sth->execute();
-        $article = $sth->fetchAll(\PDO::FETCH_ASSOC);
-        if($article!==false){
-            return new Article($article['id'], $article['title'], $article['content'], $article['date']);
-        } 
-        return null;
+
+        $articles=[];
+        $articlesData = $sth->fetchAll(\PDO::FETCH_ASSOC);
+        $userRepository = new UserRepository;
+
+        foreach ($articlesData as $articleData){
+            $articles[] = new Article($userRepository->find($articleData['user_id']), $articleData['title'], $articleData['content'], $articleData['date'], $articleData['id']);
+        }
+
+        return $articles;
     }
 
-    public function findAll():?Article {
+
+    /**
+     * @return Article[]
+     */
+    public function findAll():array{
 
 
         $sql = 'SELECT * FROM articles ORDER BY `date` DESC';
-
         $sth = $this->pdo->prepare($sql);
-
-
         $sth->execute();
-        $article = $sth->fetchAll(\PDO::FETCH_ASSOC);
-        if($article!==false){
-            return new Article($article['id'], $article['title'], $article['content'], $article['date']);
-        } 
-        return null;
+
+        $articles=[];
+        $articlesData = $sth->fetchAll(\PDO::FETCH_ASSOC);
+        $userRepository = new UserRepository;
+        foreach ($articlesData as $articleData){
+            $articles[] = new Article($userRepository->find($articleData['user_id']), $articleData['title'], $articleData['content'], $articleData['date'], $articleData['id']);
+        }
+
+        return $articles;
     }
 
 
@@ -41,49 +57,44 @@ class ArticleRepository extends CoreRepository {
 
         $sth = $this->pdo->prepare($sql);
 
-        $sth->bindParam(':id', $id);
+        $sth->bindValue(':id', $id);
 
         $sth->execute();
-        $sth->setFetchMode(\PDO::FETCH_CLASS, Article::class);
-        $article = $sth->fetch();
-        var_dump($article);
-        die;
-        if($article!==false){
-            return new Article($article['id'], $article['title'], $article['content'], $article['date']);
-        } 
-        return null;
+        $articleData = $sth->fetch(\PDO::FETCH_ASSOC);
+        $userRepository = new UserRepository;
+        return new Article($userRepository->find($articleData['user_id']), $articleData['title'], $articleData['content'], $articleData['date'], $articleData['id']);
     }
 
-    public function save(string $title, string $content):void {
-        $sql = 'INSERT INTO articles (title, content, `date`) VALUES (:title, :content, NOW())';
-
-        $sth = $this->pdo->prepare($sql);
-
-        $sth->bindParam(':title', $title);
-        $sth->bindParam(':content', $content);
-
-        $sth->execute();
-    }
-
-    
-    public function update(string $title, string $content, int $id):void {
-        $sql = 'UPDATE articles SET title=:title, content=:content WHERE id=:id';
-
-        $sth = $this->pdo->prepare($sql);
-
-        $sth->bindParam(':title', $title);
-        $sth->bindParam(':content', $content);
-        $sth->bindParam(':id', $id);
+    /**
+     * @param Article $article
+     * 
+     * @return void
+     */
+    public function save(Article $article):void {
+        if(empty($article->getId())){
+            $sql = 'INSERT INTO articles (user_id, title, content, `date`) VALUES (:user_id, :title, :content, NOW())';
+            $sth = $this->pdo->prepare($sql);
+            $sth->bindValue(':user_id', $article->getUser()->getId());
+        }else{
+            $sql = 'UPDATE articles SET title=:title, content=:content WHERE id=:id';
+            $sth = $this->pdo->prepare($sql);
+            $sth->bindValue(':id', $article->getId());
+        }
+       
+        $sth->bindValue(':title', $article->getTitle());
+        $sth->bindValue(':content', $article->getContent());
+        
 
         $sth->execute();
     }
 
-    public function delete(int $id):void {
+
+    public function delete(Article $article):void {
         $sql = 'DELETE FROM articles WHERE id=:id';
 
         $sth = $this->pdo->prepare($sql);
 
-        $sth->bindParam(':id', $id);
+        $sth->bindValue(':id', $article->getId());
 
         $sth->execute();
     }

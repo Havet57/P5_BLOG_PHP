@@ -2,16 +2,20 @@
 
 {% block body %}
 
-    <title>{{article.title}}</title>
-    </head>
-    <body>
-        <h1>{{article.title}}</h1>
-        <time>{{article.date}}</time>
-        <br><br>
-        <p>{{article.content}}</p>
-        <hr>
+<div class="container">
+        <div class="row justify-content-center">
+        <div class="col-6">
+          <h1 class="text-center">{{article.title}}</h1>
+          <br><br>
+          <p>{{article.content}}</p>
+          <time class="text-right">{{article.date}}</time>
+          <p>{{article.user.username}}</p>
+        </div>
+      </div>
+      <hr>
 
-        <div class="row">
+
+        <div class="row mb-5">
             <div class="col-6">
               <form action="" method="post">
                 <div class="form-group">
@@ -21,16 +25,21 @@
                   
                 </div>
               </form>
+              <span class="btn btn-success mb-5">
+              {{succes}}
+              </span>
+              
             </div>
         </div>
 
         {% for comment in comments %} 
-            <div class="col-md-6">
-                  <div class="mb-1 text-muted">{{comment.username}}</div>
+            <div class="col-md-6 mb-5">
+                  <div class="mb-1 text-muted">{{comment.user.username}}</div>
                   <p class="card-text mb-auto">{{comment.comment}}</p>
                   <p class="card-text mb-auto">{{comment.date}}</p>
             </div>
         {% endfor %}
+</div>
   
 {% endblock %}
     

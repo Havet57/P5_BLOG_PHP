@@ -12,15 +12,16 @@ class CommentsController extends CoreController {
 
         $toApproves = $commentsRepository->findUnapproved();
 
-        echo $this->twig->render('comments_to_approve.html.twig', ['toApproves'=>$toApproves]);
+        echo $this->twig->render('comments_to_approve.html.twig', ['toApproves'=>$toApproves, 'user' =>$this->user]);
 
     }
 
     public function delete(int $id):void{
 
         $commentsRepository = new CommentsRepository;
+        $comment = $commentsRepository->find($id);
 
-        $commentsRepository->delete($id);
+        $commentsRepository->delete($comment);
 
         header('location: index.php?controller=comments&methode=unapproved');
 
@@ -29,8 +30,9 @@ class CommentsController extends CoreController {
     public function approve(int $id):void{
 
         $commentsRepository = new CommentsRepository;
+        $comment = $commentsRepository->find($id);
 
-        $commentsRepository->approve($id);
+        $commentsRepository->approve($comment);
 
         header('location: index.php?controller=comments&methode=unapproved');
 

@@ -2,21 +2,19 @@
 
 namespace App\Entity;
 
-use phpDocumentor\Reflection\Types\Boolean;
-
 class Comment {
 
     private ?int $id;
     private string $comment;
-    private \datetime $date;
+    private string $date;
     private bool $approved;
     private Article $article;
     private User $user;
 
-    public function __construct(Article $article, User $user, string $comment, \DateTime $date, bool $approved, ?int $id=null){
+    public function __construct(Article $article, User $user, string $comment, ?string $date=null, bool $approved=false, ?int $id=null){
         $this->id=$id;
         $this->comment=$comment;
-        $this->date=$date;
+        $this->date=$date ?? date('Y-m-d');
         $this->approved=$approved;
         $this->article=$article;
         $this->user=$user;
@@ -30,9 +28,19 @@ class Comment {
         return $this->comment;
     }
 
-    public function getDate():\datetime{
+    public function getDate():string{
         return $this->date;
     }
+
+    public function getArticle():Article{
+        return $this->article;
+    }
+
+    public function getUser():User{
+        return $this->user;
+    }
+
+
 
     public function getApproved():bool {
         return $this->approved;

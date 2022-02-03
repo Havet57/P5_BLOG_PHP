@@ -17,6 +17,18 @@ class UserRepository extends CoreRepository {
         } 
         return null;
     }
+
+    public function find(int $id):?User {
+        $sql = 'SELECT * FROM users WHERE id=:id';
+
+        $sth = $this->pdo->prepare($sql);
+
+        $sth->bindValue(':id', $id);
+
+        $sth->execute();
+        $userData = $sth->fetch(\PDO::FETCH_ASSOC);
+        return new User($userData['username'], $userData['email'], $userData['password'], $userData['type'], $userData['id']);
+    }
     
     
     /**
@@ -47,7 +59,7 @@ class UserRepository extends CoreRepository {
      * 
      * @return [type]
      */
-    public function save(User $user){
+    public function save(User $user):void{
 
 
         $sql = "INSERT into `users` (username, email, type, `password` )
@@ -56,7 +68,6 @@ class UserRepository extends CoreRepository {
         $sth = $this->pdo->prepare($sql);
         $sth->bindParam(':username', $user->getUsername());
         $sth->bindParam(':email', $user->getEmail());
-        // $sth->bindParam(':pass', hash('sha256', $password));
         $sth->bindParam(':pass', $user->getPassword());
         
         $sth->bindValue(':type', User::TYPE);
