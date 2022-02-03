@@ -3,10 +3,22 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-<form method="POST">
-    <input type="text" name="textTitle">
-    <textarea name='textContent' placeholder="Taper votre contenu"></textarea>
-    <input type="submit">
-</form>
+
+<div class="container">
+
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <form method="POST">
+                                <label for="textTitle">Quel titre à votre article ?</label>
+                                <input type="texte" name="textTitle"class="form-control" id="textTitle">
+                                <br>
+                                <textarea class="form-control" rows="15" name='textContent' id="textContent" placeholder="Taper votre contenu"></textarea>
+                                <button class="btn btn-primary"type="submit"> Envoyer</button>
+                </form>
+            </div>
+        </div>
+      <hr>
+
+</div>
 {% endblock %}
 

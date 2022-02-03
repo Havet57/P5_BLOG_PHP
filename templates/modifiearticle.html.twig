@@ -3,10 +3,22 @@
 
 {% block body %}
 
-<form method="POST">
-    <input type="text" name="textTitle" value="{{article.title}}">
-    <textarea name='textContent' placeholder="Taper votre contenu">{{article.content}}</textarea>
-    <input type="submit" value="modifier">
-</form>
+<div class="container">
+
+        <div class="row justify-content-center">
+        <div class="col-6">
+            <form method="POST">
+                <h1 class="text-center">Modifie ton article</h1>
+                <label for="textTitle">Change de titre  ?</label>
+                <input type="texte" name="textTitle"class="form-control" id="textTitle" value="{{article.title}}">
+                <br>
+                <textarea class="form-control" rows="15" name='textContent' id="textContent" placeholder="Taper votre contenu">{{article.content}}</textarea>
+                <button class="btn btn-primary"type="submit">Modifier</button>
+            </form>
+        </div>
+        </div>
+      <hr>
+
+</div>
 
 {% endblock %}

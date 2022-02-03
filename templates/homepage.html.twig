@@ -6,30 +6,38 @@
     
     <div class="row">
         <div class="col my-3">
-            <h2>Développeuse en perpétuelle devenir</h2>
+            <h1>Sofia R : Développeuse back-end en perpétuel devenir</h1>
         </div>
     </div> 
 
     <div class="row">
-        <div class="col-4 mb-5">
-            <img src="public/img/avatar.png" alt="">
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-5">
+            <img class="img-fluid" src="public/img/avatar.png" alt="">
         </div>
-        <div class="col-8">
-            <p>Qui suis-je ?</p>
+        <div class="col-lg-8 col-md-12 col-lg-12">
+            <p class="sous-titre">Qui suis-je ?</p>
             <br>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet mauris eleifend, ultricies elit vulputate, vestibulum odio. Nulla bibendum egestas nisi, malesuada faucibus ex egestas egestas. Nulla malesuada lacus rutrum eros finibus tempor. Aliquam tempus, metus dictum placerat dictum, turpis libero mollis erat, eu ullamcorper lectus sem ut risus. Duis facilisis risus et tortor iaculis, nec tempor nulla imperdiet. Maecenas facilisis scelerisque tortor, vitae eleifend elit ultrices eu. Sed a mauris id quam tempus eleifend at at mauris. Proin feugiat augue eget arcu malesuada imperdiet. Donec tempor eros sit amet quam rutrum facilisis. Phasellus eget urna eget sem consectetur fringilla quis non neque. Sed lobortis id dui nec congue.
 
             Fusce vitae mollis purus. Phasellus in nulla vitae ipsum vulputate sollicitudin. Nunc vulputate non risus ut dapibus. Integer eget velit bibendum, egestas ipsum convallis, efficitur nisl. Mauris mattis interdum fringilla. Quisque dignissim fringilla leo, in mollis ipsum tempor ut. Morbi id nunc ultrices, ultricies nisi sed, tempor ipsum. Quisque tincidunt tincidunt felis, eget gravida lorem aliquet et. Cras efficitur lorem et augue iaculis viverra. Nam in gravida mauris, sit amet tincidunt ante. Duis tincidunt felis ac luctus ornare. Cras libero dolor, tincidunt in metus at, accumsan pellentesque turpis. Phasellus et suscipit elit. Proin et laoreet lacus.</p>
+            <div class="lien d-flex flex-column">
+            <a href="https://github.com/Havet-68">Clique pour voir mon Github</a>
+            <a href="https://www.linkedin.com/in/sofia-r-937675178/">Clique pour voir mon linkedin</a>
+            <a href="public/mon_cv.pdf" download>Et ici pour télécharger mon cv</a>
+            </div>
+
+
+
+            
         </div>
     </div>
     
     <div class="row mb-5">
         {% for  article in articles  %} 
-            <div class="col">
+            <div class="col-lg-4 col-md-12 col-sm-12">
                 <div class="card">
-                    <h5 class="card-header">Featured</h5>
+                    <h5 class="card-header">{{article.title}}</h5>
                     <div class="card-body">
-                        <h5 class="card-title">{{article.title}}</h5>
                         <p class="card-text">{{article.content}}</p>
                         <a href="index.php?controller=article&methode=chaque&id={{article.id}}" class="btn btn-primary">Lire la suite</a>
                     </div>
@@ -42,25 +50,25 @@
 
 
 <div class="row">
-  <div class="col-6 ">
-    <form class="border border-dark p-4">
+  <div class="col-lg-6 col-md-12 col-lg-12">
+    <form class="form-color  p-4 mb-5" method="post">
         <div class="form-row">
             <div class="col">
             <label for="firstname">Prénom :</label>
-            <input type="text" class="form-control" id="firstname" placeholder="">
+            <input type="text" name="firstname" class="form-control" id="firstname" placeholder="">
             </div>
             <div class="col">
             <label for="lastname">Nom :</label>
-            <input type="text" class="form-control" id="lastname" placeholder="">
+            <input type="text" name="lastname" class="form-control" id="lastname" placeholder="">
             </div>
         </div>
       <div class="form-group">
         <label for="mail">Adresse Mail :</label>
-        <input type="email" class="form-control" id="mail" placeholder="name@example.com">
+        <input type="email" name="mail" class="form-control" id="mail" placeholder="name@example.com">
       </div>
       <div class="form-group">
         <label for="message">Parle moi de toi :</label>
-        <textarea class="form-control" id="message" rows="3"></textarea>
+        <textarea class="form-control" name="content" id="message" rows="3"></textarea>
       </div>
       <button type="submit" class="btn btn-primary">Envoyer</button>
     </form>

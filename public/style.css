@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@600&display=swap');
+
+body {
+    background-color: #EAEAEA;
+    font-family: 'Barlow', sans-serif;
+}
+
+.footer {
+    background-color: #dfcdbf;
+}
+
+.navbar {
+    background-color: #dfcdbf;
+}
+
+
+.card {
+    height: 100%;
+}
+
+.form-color {
+    background: #A4D0BB;
+}
+
+.sous-titre {
+    font-size: 1.5rem;
+    font-style: italic bold;
+}
+
+.comments-to-approve {
+    width: 18rem ;
+}
+
+.nav-link:active {
+    color: red;
+}
+
+.okidoki {
+    color: red;
+}
+
+

@@ -18,6 +18,8 @@ class AuthentificationController extends CoreController {
             } else {
                 $message = 'ko';
             }
+
+           
             
         }
         echo $this->twig->render('login.html.twig', ['message'=>$message]);

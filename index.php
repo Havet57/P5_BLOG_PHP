@@ -9,6 +9,7 @@ require_once 'vendor/autoload.php';
 use App\Controller\HomePageController;
 use App\Controller\ArticleController;
 use App\Controller\AuthentificationController;
+use App\Controller\CommentsController;
 
 $controller=null;
 $methode=null;
@@ -66,6 +67,25 @@ if ($controller=='authentification'){
     if( $methode=='logout'){
         $controller->logout();
     }
+}
+
+if($controller=='comments'){
+    $controller = new CommentsController;
+
+    if($methode=='unapproved'){
+        $controller->displayUnapproved();
+    }
+
+    if($methode=='delete'){
+        $controller->delete($_GET['id']);
+    }
+
+    if($methode=='approve'){
+        $controller->approve($_GET['id']);
+    }
+
+
+ 
 }
 
 

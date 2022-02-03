@@ -2,60 +2,77 @@
 
 namespace App\Repository;
 
+use App\Entity\User;
+
 class UserRepository extends CoreRepository {
-    public function findOneByUsername(string $username):array{
 
-
+    public function findOneByUsername(string $username):?User{
         $sql = 'SELECT * FROM users WHERE username=:username';
+        $sth = $this->pdo->prepare($sql);
+        $sth->bindParam(':username', $username);
+        $sth->execute();
+        $user = $sth->fetch();
+        if($user!==false){
+            return new User($user['username'], $user['email'], $user['password'], $user['type'], $user['id']);
+        } 
+        return null;
+    }
+
+    public function find(int $id):?User {
+        $sql = 'SELECT * FROM users WHERE id=:id';
 
         $sth = $this->pdo->prepare($sql);
 
-        $sth->bindParam(':username', $username);
+        $sth->bindValue(':id', $id);
 
         $sth->execute();
-        $users = $sth->fetchAll(\PDO::FETCH_ASSOC);
-        return (count($users)==1)?current($users):[];
+        $userData = $sth->fetch(\PDO::FETCH_ASSOC);
+        return new User($userData['username'], $userData['email'], $userData['password'], $userData['type'], $userData['id']);
     }
-
-    public function findOneByEmail($email){
+    
+    
+    /**
+     * findOneByEmail find user by email
+     * @param mixed $email
+     * 
+     * @return User|null
+     */
+    public function findOneByEmail($email):?User{
 
 
         $sql = 'SELECT * FROM users WHERE email=:email';
-
         $sth = $this->pdo->prepare($sql);
-
         $sth->bindParam(':email', $email);
-
         $sth->execute();
-
-        $users = $sth->fetchAll(\PDO::FETCH_ASSOC);
-
-        /* ce qui est plus bas est une ternaire
-         if(count($users)==1){
-            return current($users)
-        } else {
-            return array()
-        }*/
-        return (count($users)==1)?current($users):[];
+        $user = $sth->fetch();
+        if($user!==false){
+            return new User($user['username'], $user['email'], $user['password'], $user['type'], $user['id']);
+        } 
+        return null;
     }
 
-    public function save($username, $email, $password){
+    /**
+     * save save new user
+     * @param mixed $username
+     * @param mixed $email
+     * @param mixed $password
+     * 
+     * @return [type]
+     */
+    public function save(User $user):void{
 
 
-        $sql = "INSERT into `users` (username, email, `password`)
-        VALUES (:username, :email, :pass)";
+        $sql = "INSERT into `users` (username, email, type, `password` )
+        VALUES (:username, :email, :type, :pass )";
 
         $sth = $this->pdo->prepare($sql);
-
-        $sth->bindParam(':username', $username);
-        $sth->bindParam(':email', $email);
-        $sth->bindParam(':pass', hash('sha256', $password));
+        $sth->bindParam(':username', $user->getUsername());
+        $sth->bindParam(':email', $user->getEmail());
+        $sth->bindParam(':pass', $user->getPassword());
+        
+        $sth->bindValue(':type', User::TYPE);
 
         $sth->execute();
-
-        var_dump('test');
-
-        die;
 
 
     }

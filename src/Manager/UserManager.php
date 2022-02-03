@@ -2,6 +2,7 @@
 
 namespace App\Manager;
 
+use App\Entity\User;
 use App\Repository\UserRepository;
 
 class UserManager {
@@ -10,7 +11,7 @@ class UserManager {
         $user=$userRepository->findOneByUsername($name);
 
         if(!empty($user)){ 
-            if(hash('sha256', $password) == $user['password']){
+            if(password_verify($password, $user->getPassword())){
                 return true; 
             }   
         }
@@ -22,7 +23,9 @@ class UserManager {
         $userByEmail=$userRepository->findOneByEmail($email);
         $userByUsername=$userRepository->findOneByUsername($username);
         if(empty($userByEmail) && empty($userByUsername)){
-            $userRepository->save($username, $password, $email);
+            $user= new User($username, $email, $password);
+            $user->setPassword($password);
+            $userRepository->save($user);
             return true;
         }
 
