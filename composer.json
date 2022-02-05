@@ -8,8 +8,7 @@
         }
     ],
     "require": {
-        "twig/twig": "^3.3",
-        "phpmailer/phpmailer": "^6.5"
+        "twig/twig": "^3.3"
     }, 
     "autoload": {
         "psr-4": {
