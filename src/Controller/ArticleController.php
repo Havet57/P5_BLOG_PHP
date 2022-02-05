@@ -54,7 +54,7 @@ class ArticleController extends CoreController {
                 $article->setTitle($_POST['textTitle']);
                 $article->setContent($_POST['textContent']);
                 $articleRepository->save($article);
-                header('Location: index.php');
+                header('Location: index.php?controller=article&methode=tous');
             }
             
 
