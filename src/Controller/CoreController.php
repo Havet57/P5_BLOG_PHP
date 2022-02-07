@@ -6,8 +6,6 @@ use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-
-
 class CoreController {
     protected $twig;
     protected $user;

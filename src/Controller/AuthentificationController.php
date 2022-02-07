@@ -49,8 +49,4 @@ class AuthentificationController extends CoreController {
     }
     
     
-}
-
-
-
-?>
+}?>
