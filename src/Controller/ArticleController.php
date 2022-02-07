@@ -14,7 +14,7 @@ class ArticleController extends CoreController {
         $repository = new ArticleRepository;
         $article=$repository->find($id);
         if(!empty($_POST['comments'])){
-            $comment = new Comment($article, $this->user,  $_POST['comments'] );
+            $comment = new Comment($article, $this->user,  $this->request->request->get('comments'));
             $commentsRepository->save($comment);
             $succes = 'Votre commentaire a bien été envoyé et sera très prochainement approuvé par un modérateur';
         }
