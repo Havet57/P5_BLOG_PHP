@@ -13,7 +13,7 @@ class AuthentificationController extends CoreController {
             //si le name est ok on vérifie l'password
             if($userManager->isAuthenticate($this->request->request->get('username'), $this->request->request->get('password'))){
                 //redirection vers la page des articles
-  /*problème superglobale session*/              $_SESSION['username']=$this->request->request->get('username');
+            $this->request->getSession()->set('username', $this->request->request->get('username'));
                 header('Location: index.php');
             } else {
                 $message = 'ko';

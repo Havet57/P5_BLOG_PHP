@@ -5,7 +5,7 @@ use App\Repository\ArticleRepository;
 
 class HomePageController extends CoreController {
     public function home (){      
-        if(isset($this->request->request->get('mail'))){
+        if(!empty($this->request->request->get('mail'))){
             $email=$this->request->request->get('mail');
             $firstname=$this->request->request->get('firstname');
             $lastname=$this->request->request->get('lastname');

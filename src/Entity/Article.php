@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-// require_once 'admin.class.php';
 class Article {
     private ?int $id;
     private string $title;
