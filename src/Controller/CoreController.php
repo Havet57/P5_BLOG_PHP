@@ -23,9 +23,7 @@ class CoreController {
         $this->twig = new \Twig\Environment($loader);
         if(!empty($this->request->getSession()->get('username'))){
             $this->user = (new UserRepository)->findOneByUsername($this->request->getSession()->get('username'));
-        }
-
-        
+        }  
     } 
 
 }
