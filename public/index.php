@@ -1,15 +1,19 @@
 <?php
 
 
-require_once 'vendor/autoload.php';
+require_once '../vendor/autoload.php';
 
 use App\Controller\HomePageController;
 use App\Controller\ArticleController;
 use App\Controller\AuthentificationController;
 use App\Controller\CommentsController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 $request = Request::createFromGlobals();
+if (!$request->hasSession()) {
+    $request->setSession(new Session());
+}   
 $controller=null;
 $methode=null;
 
@@ -22,11 +26,11 @@ if(!empty($request->query->get('methode'))){
 }
 
 if(empty($controller) && empty($methode)){
-    $controller = new HomePageController;
+    $controller = new HomePageController($request);
     $controller->home();
 }
 if($controller=='article') {
-    $controller = new ArticleController;
+    $controller = new ArticleController($request);
 
     if( $methode=='chaque' ){
         $controller->displayArticle($request->query->get('id'));
@@ -53,7 +57,7 @@ if($controller=='article') {
 
 if ($controller=='authentification'){
 
-    $controller = new AuthentificationController;
+    $controller = new AuthentificationController($request);
 
     if( $methode=='login' ){
         $controller->login();
@@ -69,7 +73,7 @@ if ($controller=='authentification'){
 }
 
 if($controller=='comments'){
-    $controller = new CommentsController;
+    $controller = new CommentsController($request);
 
     if($methode=='unapproved'){
         $controller->displayUnapproved();
