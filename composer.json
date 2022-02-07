@@ -1,4 +1,4 @@
-{
+{   
     "name": "sosob/blog",
     "description": "test blog",
     "authors": [
@@ -19,5 +19,7 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5"
-    }
+    },
+
+    "proprietary"
 }

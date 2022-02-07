@@ -25,5 +25,4 @@ class CoreController {
             $this->user = (new UserRepository)->findOneByUsername($this->request->getSession()->get('username'));
         }  
     } 
-
 }

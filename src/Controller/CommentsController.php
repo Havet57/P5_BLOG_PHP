@@ -17,7 +17,7 @@ class CommentsController extends CoreController {
 
     }
 
-    public function delete(int $id):void{
+    public function delete(int $id){
 
         $commentsRepository = new CommentsRepository;
         $comment = $commentsRepository->find($id);
@@ -28,7 +28,7 @@ class CommentsController extends CoreController {
 
     }
 
-    public function approve(int $id):void{
+    public function approve(int $id){
 
         $commentsRepository = new CommentsRepository;
         $comment = $commentsRepository->find($id);

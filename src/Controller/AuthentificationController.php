@@ -15,6 +15,7 @@ class AuthentificationController extends CoreController {
             if($userManager->isAuthenticate($this->request->request->get('username'), $this->request->request->get('password'))){
                 //redirection vers la page des articles
             $this->request->getSession()->set('username', $this->request->request->get('username'));
+            return (new RedirectResponse('index.php'))->send();
                 
             } else {
                 $message = 'ko';
