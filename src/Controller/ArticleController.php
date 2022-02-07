@@ -24,7 +24,7 @@ class ArticleController extends CoreController {
             $comments = $commentsRepository->findAll($article);
             echo $this->twig->render('article.html.twig', ['article' => $article, 'comments' => $comments, 'succes' => $succes, 'user'=> $this->user]);    
         }else{
-            header('location: index.php?controller=authentification&methode=login');
+            return (new RedirectResponse('index.php?controller=authentification&methode=login'))->send();
         }
     }
 
@@ -44,7 +44,7 @@ class ArticleController extends CoreController {
             $ArticleRepository = new ArticleRepository;
             $article = new Article($this->user, $this->request->request->get('textTitle'), $this->request->request->get('textContent'));
             $ArticleRepository->save($article);
-            header('location: index.php?controller=article&methode=tous');  
+            return (new RedirectResponse('index.php?controller=article&methode=tous'))->send();
         }
         echo $this->twig->render('ecrireunarticle.html.twig', ['user' => $this->user]);
     }
@@ -57,7 +57,7 @@ class ArticleController extends CoreController {
                 $article->setTitle($this->request->request->get('textTitle'));
                 $article->setContent($this->request->request->get('textContent'));
                 $articleRepository->save($article);
-                header('Location: index.php?controller=article&methode=tous');
+                return (new RedirectResponse('index.php?controller=article&methode=tous'))->send();
             }
             
 
@@ -73,7 +73,7 @@ class ArticleController extends CoreController {
         $article = $articleRepository->find($id);
         $articleRepository->delete($article);
 
-        header('location: index.php?controller=article&methode=tous');
+        return (new RedirectResponse('index.php?controller=article&methode=tous'))->send();
 
         
     }

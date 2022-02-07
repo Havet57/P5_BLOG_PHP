@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Manager\UserManager;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class AuthentificationController extends CoreController {
     public function login(){
@@ -14,7 +15,7 @@ class AuthentificationController extends CoreController {
             if($userManager->isAuthenticate($this->request->request->get('username'), $this->request->request->get('password'))){
                 //redirection vers la page des articles
             $this->request->getSession()->set('username', $this->request->request->get('username'));
-                header('Location: index.php');
+                
             } else {
                 $message = 'ko';
             }
@@ -34,16 +35,16 @@ class AuthentificationController extends CoreController {
             //Vérifier la non existence du mail dans la bdd
             //si elle n'existe pas
             if($userManager->isSave($this->request->request->get('username'), $this->request->request->get('password'), $this->request->request->get('email'))){
-                header('Location: index.php');
+                return (new RedirectResponse('index.php'))->send();
             }
         }
         echo $this->twig->render('register.html.twig');
     }
 
     public function logout(){
-        session_destroy();
+        $this->request->getSession()->clear();
 
-        header('location: index.php');
+        return (new RedirectResponse('index.php'))->send();
     }
     
     

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\CommentsRepository;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class CommentsController extends CoreController {
 
@@ -23,7 +24,7 @@ class CommentsController extends CoreController {
 
         $commentsRepository->delete($comment);
 
-        header('location: index.php?controller=comments&methode=unapproved');
+        return (new RedirectResponse('index.php?controller=comments&methode=unapproved'))->send();
 
     }
 
@@ -34,7 +35,7 @@ class CommentsController extends CoreController {
 
         $commentsRepository->approve($comment);
 
-        header('location: index.php?controller=comments&methode=unapproved');
+        return (new RedirectResponse('index.php?controller=comments&methode=unapproved'))->send();
 
     }
 }
