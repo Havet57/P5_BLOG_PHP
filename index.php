@@ -44,11 +44,11 @@ if($controller=='article') {
     }
 
     if( $methode=='update'){
-        $controller->updateArticle($_GET['id']);
+        $controller->updateArticle($request->query->get('id'));
     }
 
     if( $methode=='delete'){
-        $controller->deleteArticle($_GET['id']);
+        $controller->deleteArticle($request->query->get('id'));
     }
 
 
@@ -79,11 +79,11 @@ if($controller=='comments'){
     }
 
     if($methode=='delete'){
-        $controller->delete($_GET['id']);
+        $controller->delete($request->query->get('id'));
     }
 
     if($methode=='approve'){
-        $controller->approve($_GET['id']);
+        $controller->approve($request->query->get('id'));
     }
 
 
