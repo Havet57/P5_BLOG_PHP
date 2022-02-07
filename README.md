@@ -17,8 +17,8 @@ Install the project by cloning it onto your system using git
 
 ## Database
 
-Please create a mysql database with utf8_general_ci. 
-Then please upload the `database.sql` to your newly created database. 
+Please create a mysql database named `blog` with utf8_general_ci. 
+Then run this command line `mysql -uroot -p blog < database.sql` to create all the tables.
 
 ## Environment Variables
 
