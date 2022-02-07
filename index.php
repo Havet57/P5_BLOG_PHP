@@ -10,8 +10,9 @@ use App\Controller\HomePageController;
 use App\Controller\ArticleController;
 use App\Controller\AuthentificationController;
 use App\Controller\CommentsController;
-use App\Utils\HttpParameters;
+use Symfony\Component\HttpFoundation\Request;
 
+$request = Request::createFromGlobals();
 $controller=null;
 $methode=null;
 
@@ -31,7 +32,7 @@ if($controller=='article') {
     $controller = new ArticleController;
 
     if( $methode=='chaque' ){
-        $controller->displayArticle(HttpParameters::get('id'));
+        $controller->displayArticle($request->query->get('id'));
     }
     
     if( $methode=='tous' ){
