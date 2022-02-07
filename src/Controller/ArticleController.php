@@ -6,6 +6,8 @@ use App\Entity\Article;
 use App\Entity\Comment;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentsRepository;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+
 
 class ArticleController extends CoreController {
     public function displayArticle(int $id){ 
@@ -32,7 +34,7 @@ class ArticleController extends CoreController {
             $articles = $articleRepository->findAll();
             echo $this->twig->render('touslesarticles.html.twig', ['articles' => $articles, 'user'=> $this->user]);
         }else{
-            header('location: index.php?controller=authentification&methode=login');
+            return (new RedirectResponse('index.php?controller=authentification&methode=login'))->send();
         }
     }
 
