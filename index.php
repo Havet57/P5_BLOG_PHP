@@ -4,8 +4,6 @@ session_start();
 
 require_once 'vendor/autoload.php';
 
-// var_dump($_SERVER);
-// die;
 use App\Controller\HomePageController;
 use App\Controller\ArticleController;
 use App\Controller\AuthentificationController;
@@ -16,12 +14,12 @@ $request = Request::createFromGlobals();
 $controller=null;
 $methode=null;
 
-if(isset($_GET['controller'])){
-    $controller=$_GET['controller'];
+if(!empty($request->query->get('controller'))){
+    $controller=$request->query->get('controller');
 }
 
-if(isset($_GET['methode'])){
-    $methode=$_GET['methode'];
+if(!empty($request->query->get('methode'))){
+    $methode=$request->query->get('methode');
 }
 
 if(empty($controller) && empty($methode)){
