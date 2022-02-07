@@ -5,11 +5,11 @@ use App\Repository\ArticleRepository;
 
 class HomePageController extends CoreController {
     public function home (){      
-        if(isset($_POST['mail'])){
-            $email=$_POST['mail'];
-            $firstname=$_POST['firstname'];
-            $lastname=$_POST['lastname'];
-            $content=$_POST['content'];
+        if(isset($this->request->request->get('mail'))){
+            $email=$this->request->request->get('mail');
+            $firstname=$this->request->request->get('firstname');
+            $lastname=$this->request->request->get('lastname');
+            $content=$this->request->request->get('content');
         }
         $repository = new ArticleRepository;
         $articles=$repository->findMostRecent();

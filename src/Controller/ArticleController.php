@@ -13,7 +13,7 @@ class ArticleController extends CoreController {
         $commentsRepository = new CommentsRepository;
         $repository = new ArticleRepository;
         $article=$repository->find($id);
-        if(!empty($_POST['comments'])){
+        if(!empty($this->request->request->get('comments'))){
             $comment = new Comment($article, $this->user,  $this->request->request->get('comments'));
             $commentsRepository->save($comment);
             $succes = 'Votre commentaire a bien été envoyé et sera très prochainement approuvé par un modérateur';
@@ -37,9 +37,10 @@ class ArticleController extends CoreController {
     }
 
     public function createArticle(){
-        if ((!empty($_POST['textTitle'])) && (!empty($_POST['textContent']))) {
+
+        if ((!empty($this->request->request->get('textTitle'))) && (!empty($this->request->request->get('textContent')))) {
             $ArticleRepository = new ArticleRepository;
-            $article = new Article($this->user, $_POST['textTitle'], $_POST['textContent']);
+            $article = new Article($this->user, $this->request->request->get('textTitle'), $this->request->request->get('textContent'));
             $ArticleRepository->save($article);
             header('location: index.php?controller=article&methode=tous');  
         }
@@ -50,9 +51,9 @@ class ArticleController extends CoreController {
         if($this->user->isAdmin()){
             $articleRepository = new ArticleRepository;
             $article = $articleRepository->find($id);
-            if(!empty($_POST['textTitle'])){
-                $article->setTitle($_POST['textTitle']);
-                $article->setContent($_POST['textContent']);
+            if(!empty($this->request->request->get('textTitle'))){
+                $article->setTitle($this->request->request->get('textTitle'));
+                $article->setContent($this->request->request->get('textContent'));
                 $articleRepository->save($article);
                 header('Location: index.php?controller=article&methode=tous');
             }

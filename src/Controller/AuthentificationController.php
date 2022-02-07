@@ -7,13 +7,13 @@ use App\Manager\UserManager;
 class AuthentificationController extends CoreController {
     public function login(){
         $message=null;
-        if(isset($_POST['username']) && isset($_POST['password'])){
+        if(!empty($this->request->request->get('username')) && !empty($this->request->request->get('password'))){
             $userManager = new UserManager;
             //vérifier le nom d'utilisateur en base de données
             //si le name est ok on vérifie l'password
-            if($userManager->isAuthenticate($_POST['username'], $_POST['password'])){
+            if($userManager->isAuthenticate($this->request->request->get('username'), $this->request->request->get('password'))){
                 //redirection vers la page des articles
-                $_SESSION['username']=$_POST['username'];
+  /*problème superglobale session*/              $_SESSION['username']=$this->request->request->get('username');
                 header('Location: index.php');
             } else {
                 $message = 'ko';
@@ -29,11 +29,11 @@ class AuthentificationController extends CoreController {
 
 
     public function register(){
-        if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])){
+        if(!empty($this->request->request->get('username')) && !empty($this->request->request->get('password')) && !empty($this->request->request->get('email'))){
             $userManager = new UserManager;
             //Vérifier la non existence du mail dans la bdd
             //si elle n'existe pas
-            if($userManager->isSave($_POST['username'], $_POST['password'], $_POST['email'])){
+            if($userManager->isSave($this->request->request->get('username'), $this->request->request->get('password'), $this->request->request->get('email'))){
                 header('Location: index.php');
             }
         }
