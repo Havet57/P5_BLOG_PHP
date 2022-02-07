@@ -15,6 +15,11 @@ Install the project by cloning it onto your system using git
   composer install
 ```
 
+## Database
+
+Please create a mysql database with utf8_general_ci. 
+Then please upload the `database.sql` to your newly created database. 
+
 ## Environment Variables
 
 To run this project, you must update the `config/database.json` with your database values (host, user, password, dbname).
