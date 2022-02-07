@@ -10,6 +10,7 @@ use App\Controller\HomePageController;
 use App\Controller\ArticleController;
 use App\Controller\AuthentificationController;
 use App\Controller\CommentsController;
+use App\Utils\HttpParameters;
 
 $controller=null;
 $methode=null;
@@ -30,7 +31,7 @@ if($controller=='article') {
     $controller = new ArticleController;
 
     if( $methode=='chaque' ){
-        $controller->displayArticle($_GET['id']);
+        $controller->displayArticle(HttpParameters::get('id'));
     }
     
     if( $methode=='tous' ){
