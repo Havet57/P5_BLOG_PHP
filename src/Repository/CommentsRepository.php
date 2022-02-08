@@ -82,7 +82,7 @@ class CommentsRepository extends CoreRepository {
 
         $sth = $this->pdo->prepare($sql);
 
-        $sth->bindParam(':id', $comment->getId());
+        $sth->bindValue(':id', $comment->getId());
 
         $sth->execute();
     }
@@ -93,7 +93,7 @@ class CommentsRepository extends CoreRepository {
 
         $sth = $this->pdo->prepare($sql);
 
-        $sth->bindParam(':id', $comment->getId());
+        $sth->bindValue(':id', $comment->getId());
 
         $sth->execute();
     }

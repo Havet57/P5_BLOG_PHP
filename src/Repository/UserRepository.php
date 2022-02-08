@@ -9,7 +9,7 @@ class UserRepository extends CoreRepository {
     public function findOneByUsername(string $username):?User{
         $sql = 'SELECT * FROM users WHERE username=:username';
         $sth = $this->pdo->prepare($sql);
-        $sth->bindParam(':username', $username);
+        $sth->bindValue(':username', $username);
         $sth->execute();
         $user = $sth->fetch();
         if($user!==false){
@@ -42,7 +42,7 @@ class UserRepository extends CoreRepository {
 
         $sql = 'SELECT * FROM users WHERE email=:email';
         $sth = $this->pdo->prepare($sql);
-        $sth->bindParam(':email', $email);
+        $sth->bindValue(':email', $email);
         $sth->execute();
         $user = $sth->fetch();
         if($user!==false){
@@ -66,9 +66,9 @@ class UserRepository extends CoreRepository {
         VALUES (:username, :email, :type, :pass )";
 
         $sth = $this->pdo->prepare($sql);
-        $sth->bindParam(':username', $user->getUsername());
-        $sth->bindParam(':email', $user->getEmail());
-        $sth->bindParam(':pass', $user->getPassword());
+        $sth->bindValue(':username', $user->getUsername());
+        $sth->bindValue(':email', $user->getEmail());
+        $sth->bindValue(':pass', $user->getPassword());
         
         $sth->bindValue(':type', User::TYPE);
 
