@@ -8,4 +8,3 @@
   } else {
     echo "Échec de l'envoi de l'email...";
   }
-?>
